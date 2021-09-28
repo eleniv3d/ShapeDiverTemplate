@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>ShapeDiver Viewer v2</title>
+
+    <!-- ShapeDiver Viewer -->
+    <script defer src="https://viewer.shapediver.com/v2/2.28.0/sdv.concat.min.js"></script>
+    <link rel='stylesheet' type='text/css' href='https://viewer.shapediver.com/v2/2.28.0/sdv.css'>
+
+    <!-- ShapeDiver Viewer Controls and Export Modal Dialog Dependencies -->
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css" integrity="sha256-sO/kKFCHPL4rhYHDyHC2dwGlaIBttifOfQ0ZaGLAheo=" crossorigin="anonymous" />
+    <!-- UIkit JS -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js" integrity="sha256-jN++RwBoYassp9qTuZDfQuptszFdL1Pm4dKZWS5KjjY=" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js" integrity="sha256-6pktS+jePPdXx9oCn8r4hS5jR1eq0Ry7vbifYtG0LDU=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- ShapeDiver Viewer Main Container -->
+  <div id='sdv-container' class='shapediver-container-flex shapediver-container-fullsize' sdv-fullscreen='true'>
+    <!-- ShapeDiver Viewer Settings Controls Container -->
+    <div id='sdv-container-settings' class='shapediver-settings-flex' style='display: none;'></div>
+    <!-- ShapeDiver Viewer Viewport Container -->
+    <div class='shapediver-viewport-flex'>
+      <div id='sdv-container-viewport' class='shapediver-container-fullsize' style='opacity: 0;'
+          logginglevel=0
+          messagelogginglevel=2
+      >
+      </div>
+      <!-- The loading icon will be created here -->
+    </div>
+    <!-- ShapeDiver Viewer Parameter Controls Container -->
+    <div id='sdv-container-controls' class='shapediver-controls-flex' style='display: none;'></div>
+  </div>
+
+  <script>
+    // ShapeDiver Viewer Initialisation
+    var initSdvApp = function(/*event*/) {
+      // settings can be defined here or as attributes of the viewport container
+      // settings defined here take precedence
+      let settings = {
+        ticket: "85d9977f5426033e058a60c8b81c2c91d331d5eec7bdfed66d354132539d4efb0d01bd6e5d7bc61bc8894b820fff1922d2a2e7e6b7f5883d244f93f0c9ce73daa540ccd7b6d1a1d9ccc40307c3549ff3bbce1a7e902ac438abb53b472d73f2fd2578881f8846e73c4af238f34b9725c41232a2e3129d-d34ace0dbe577c6152ee63654b9e807c",
+        modelViewUrl: 'eu-central-1', // or 'us-east-1' or address of your own ShapeDiver model view server
+      };
+      // provide global access to the ShapeDiver Viewer API returned by the constructor
+      window.api = new SDVApp.ParametricViewer(settings);
+    };
+    // there is a slight chance that loading has been completed already
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSdvApp, false);
+    } else {
+      initSdvApp();
+    }
+  </script>
+
+</body>
+</html>
